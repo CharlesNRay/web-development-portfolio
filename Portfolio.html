@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+
+    <!-- ----------- creates classes and adds some text and makes header tabs ------- -->
+    <div id="header">
+        <div class="container">
+            <nav>
+                <h1>
+                    <span>N</span>elson
+                </h1>
+                <ul>
+                    <li><a href="#header">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-text">
+                <p>UI/UX Designer</p>
+                <h1>Welcome, I'm <span>Nelson</span><br> an interactive designer</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- -------------- about -------------- -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/user.png" />
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <p>
+                        I'm Nelson Ray, and I'm currently studying at KSU. I hope to be capable of making
+                        <br>crisp and clean websites. My goals in life currently are to get back in shape. I injured
+                        <br>my lower left back severely. Due to this injury I was unable to do anything for roughly
+                        <br>2 years. Now that I am back on my feet I am dedicating my time to self growth and self care.
+                        <br> <br> I am an identical twin and an irish triplet. Some of my hobbies include a love to play basically
+                        <br>all sports, favoritism for basketball.I play video games with friends, watch anime/tv shows, read
+                        <br>books, go on hikes, play with my pets (dogs and cats).
+                        <br> <br>Career wise I'm looking forward to developing my skills over the next few months and years.
+                        <br>Over the summer I'm planning to create a few websites for fun and practice for some peers.
+                        <br>I am also looking to improve my coding skills not just for web design, but for game design as well.
+                        <br>Game design to me is a rather spectacular hobby of mine. It requires very precise code, and time
+                        <br>plus dedication to complete game design projects.I love to learn and express myself, and both
+                        <br>Game Design and Web Development help me do just that!
+                    </p>
+
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+
+                    <!-- ----------Skills Tab -->
+                    <div class="tab-contents active-tab" id="skills">
+                        <ul>
+                            <li><span>UI/UX</span><br>Designing Web/App interfaces</li>
+                            <li><span>Web Development</span><br>Web app Development</li>
+                            <li><span>App Development</span><br>Building Android/iOS apps</li>
+                            <li><span>Game Development</span><br>Game Design </li>
+                            <li><span>Coding Experience</span><br>C# / CSS / html / Java </li>
+                        </ul>
+                    </div>
+
+                    <!-- ----------Experience Tab -->
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Chess Educator</span><br>Educated students on the fundamentals of chess</li>
+                            <li><span>Kroger Cashier</span><br>Customer Service and Checkout</li>
+                            <li><span>Marietta Toyota</span><br>Customer Service, porter, and Retail</li>
+                            <li><span>Papa Johns</span><br>Delivery Driver </li>
+                        </ul>
+                    </div>
+
+                    <!-- ----------Education Tab -->
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><span>Kennesaw State University</span><br>2021-2024 UI/UX<br>2016-2019 Game Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ----------------Contact ------------ -->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p>mrraycharlesn123@gmail.com</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/nelson-ray-256bb5246/"> <img src="images/linkedInIcon.png" /> </a>
+                    </div>
+                </div>
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                        <input type"email" name="Email" placeholder="Your Email" required>
+                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- script allows navigation between tabs in about me section. also hides the active highlight.-->
+    <script src="scripts.js"></script>
+
+    <form name="submit-to-google-sheet">
+        <button type="submit">Send</button>
+    </form>
+
+    <!-- script allows communication between form document and google sheets-->
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzxiy5B42jW3NzRUr-Q0uC6vLoWFh3kukbvOY9WK6n_uh0T-Kn6G2GIkkUdpBSltTFufg/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("msg")
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => {
+                    msg.innerHTML = " Message sent successfully"
+                    setTimeout(function () {
+                        msg.innerHTML = ""
+                    }, 6000)
+                    form.reset
+                        .catch(error => console.error('Error!', error.message))
+                })
+    </script>
+</body>
+</html>
