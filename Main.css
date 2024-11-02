@@ -145,7 +145,7 @@ nav ul li a{
 .tab-contents{
     display: none;
 }
-    /* only displays content on tabs when its needed*/
+/* only displays content on tabs when its needed*/
 .tab-contents.active-tab{
     display: block;
 }

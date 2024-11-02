@@ -107,7 +107,10 @@
                     </div>
                 </div>
                 <div class="contact-right">
-                    <form name="submit-to-google-sheet">
+                    <!-- This will submit the form and send a message on localhost. Note, Hitting submit on the actual website with this one, will not work.-->
+                    <form action="/submit-form" method="post">
+                        <!--How I had it before. Wanted to try it the way assignment 3 told us to do it directly above. Just comment above out and undo the comment below to reverse it.-->
+                        <!-- <form name="submit-to-google-sheet"> -->
                         <input type="text" name="Name" placeholder="Your Name" required>
                         <input type"email" name="Email" placeholder="Your Email" required>
                         <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
@@ -117,7 +120,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 
@@ -128,11 +130,12 @@
         <button type="submit">Send</button>
     </form>
 
-    <!-- script allows communication between form document and google sheets-->
-    <script>
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbzxiy5B42jW3NzRUr-Q0uC6vLoWFh3kukbvOY9WK6n_uh0T-Kn6G2GIkkUdpBSltTFufg/exec'
+<!-- script allows communication between form document and google sheets-->
+   <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwEcSqXIv0F3BUyacdcra2xvCaSil5aJL0bmCZquLg9Z3x2S8x8LmULmkV61IlLmAXNBA/exec'
         const form = document.forms['submit-to-google-sheet']
         const msg = document.getElementById("msg")
+
         form.addEventListener('submit', e => {
             e.preventDefault()
             fetch(scriptURL, { method: 'POST', body: new FormData(form) })
@@ -141,9 +144,11 @@
                     setTimeout(function () {
                         msg.innerHTML = ""
                     }, 6000)
-                    form.reset
-                        .catch(error => console.error('Error!', error.message))
+                    form.reset()           
                 })
+                .catch(error => console.error('Error!', error.message))
+
     </script>
+
 </body>
 </html>
